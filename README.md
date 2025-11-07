@@ -133,11 +133,19 @@ Base is the perfect platform for Based AF because it provides:
 
 ## 📚 Documentation
 
+**Complete Documentation Index:** [DOCUMENTATION-INDEX.md](./DOCUMENTATION-INDEX.md)
+
+### For Everyone
+- **[README.md](./README.md)** - Project overview (you are here)
+- **[PRESENTATION-GUIDE.md](./PRESENTATION-GUIDE.md)** - Complete presentation guide with demo script
+
+### For Developers
 - **[SETUP.md](./SETUP.md)** - Complete setup guide with prerequisites
 - **[my-onchainkit-app/README.md](./my-onchainkit-app/README.md)** - Application-specific documentation
 - **[my-onchainkit-app/DEPLOYMENT.md](./my-onchainkit-app/DEPLOYMENT.md)** - Smart contract deployment guide
 - **[my-onchainkit-app/NEXT-STEPS.md](./my-onchainkit-app/NEXT-STEPS.md)** - Development roadmap
 - **[my-onchainkit-app/QUICK-REF.md](./my-onchainkit-app/QUICK-REF.md)** - Quick reference for commands
+- **[my-onchainkit-app/contracts/README.md](./my-onchainkit-app/contracts/README.md)** - Smart contracts documentation
 
 ## 🎓 Resources
 
