@@ -1,20 +1,22 @@
-# Base Buildathon Setup Guide
+# 🚀 Based AF - Setup Guide
+
+Complete setup guide for developers and hackathon judges.
 
 ## ✅ Prerequisites Checklist
 
-### 1. Accounts & API Keys
-- [ ] GitHub account: https://github.com/
-- [ ] Vercel account: https://vercel.com/
-- [ ] Coinbase Wallet (Base): https://wallet.coinbase.com/
-- [ ] Coinbase Developer Platform API Key: https://portal.cdp.coinbase.com/projects/api-keys/client-key
+### Required Accounts & Keys
+- [ ] **GitHub account**: https://github.com/
+- [ ] **Coinbase Wallet** (Base): https://wallet.coinbase.com/
+- [ ] **Coinbase Developer Platform API Key**: https://portal.cdp.coinbase.com/projects/api-keys/client-key
 
-### 2. Development Tools
-- [x] Node.js 18+ (Current: v24.10.0) ✓
-- [ ] VS Code: https://code.visualstudio.com/
-- [ ] Build Tools (Windows only): https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022
+### Optional (for deployment)
+- [ ] **Vercel account**: https://vercel.com/
 
-### 3. Prototyping Tools
-- [ ] Lovable account: https://lovable.dev/
+### Development Tools
+- [x] **Node.js 18+** (Current: v24.10.0) ✓
+- [ ] **VS Code** (Recommended): https://code.visualstudio.com/
+- [ ] **Git**: Installed and configured
+- [ ] **Build Tools** (Windows only): https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022
 
 ## 🌐 Base Network Information
 
@@ -32,143 +34,183 @@
 - **Currency**: ETH
 - **Block Explorer**: https://sepolia-explorer.base.org
 
-## 🚀 Quick Start Options
+## 🚀 Quick Start (Recommended Path)
 
-### Option 1: OnchainKit Template (Recommended)
+### Step 1: Clone the Repository
 ```bash
-# Create a new OnchainKit project
-npm create onchain@latest
+git clone https://github.com/ThisIsPhila/hackathon.git
+cd hackathon/my-onchainkit-app
+```
 
-# Follow prompts:
-# - Project name
-# - CDP API Key (from Coinbase Developer Platform)
-
-# Navigate to project and run
-cd my-onchainkit-app
+### Step 2: Install Dependencies
+```bash
 npm install
+```
+
+### Step 3: Get Base Sepolia ETH
+Visit the **Coinbase Developer Platform Faucet**: https://portal.cdp.coinbase.com/products/faucet
+- Connect your wallet
+- Request Base Sepolia ETH
+- Wait for confirmation (~30 seconds)
+
+### Step 4: Configure Environment
+Create `.env.local` file in `my-onchainkit-app/`:
+```env
+NEXT_PUBLIC_CDP_API_KEY=your_api_key_here
+NEXT_PUBLIC_CLOUT_TOKEN_ADDRESS=0x...
+NEXT_PUBLIC_PROFILE_NFT_ADDRESS=0x...
+NEXT_PUBLIC_MEME_NFT_ADDRESS=0x...
+NEXT_PUBLIC_BATTLE_ARENA_ADDRESS=0x...
+```
+
+### Step 5: Run Development Server
+```bash
 npm run dev
 ```
 
-### Option 2: Manual Setup with Foundry
+Open [http://localhost:3000](http://localhost:3000) in your browser!
 
-#### Step 1: Install Foundry
+## 🔧 Smart Contract Deployment
+
+### Step 1: Install Foundry
 ```bash
-# Install Foundry
+# Install Foundry (if not already installed)
 curl -L https://foundry.paradigm.xyz | bash
 foundryup
 ```
 
-#### Step 2: Create Project Structure
+### Step 2: Navigate to Contracts
 ```bash
-# Create contracts directory
-mkdir contracts && cd contracts
-
-# Initialize Foundry (without git since it's a subfolder)
-forge init --no-git
+cd contracts
 ```
 
-#### Step 3: Configure Environment
-Create `.env` file in contracts directory:
-```env
-BASE_RPC_URL="https://mainnet.base.org"
-BASE_SEPOLIA_RPC_URL="https://sepolia.base.org"
+### Step 3: Build Contracts
+```bash
+forge build
 ```
 
-#### Step 4: Secure Private Key
+### Step 4: Secure Your Private Key
 ```bash
-# Import private key to Foundry keystore
+# Import private key to Foundry keystore (SECURE METHOD)
 cast wallet import deployer --interactive
 
 # Enter your private key and password when prompted
 # Key stored in ~/.foundry/keystores (not tracked by git)
 ```
 
-#### Step 5: Get Testnet ETH
-Get free Base Sepolia ETH from faucets:
-- https://docs.base.org/base-chain/tools/network-faucets
-
-#### Step 6: Deploy Contract
+### Step 5: Deploy to Base Sepolia
 ```bash
-# Load environment variables
-source .env
-
-# Compile and deploy
-forge create ./src/Counter.sol:Counter \
-  --rpc-url $BASE_SEPOLIA_RPC_URL \
-  --account deployer
-
-# Save contract address to .env
-echo 'COUNTER_CONTRACT_ADDRESS="0x..."' >> .env
-source .env
+# Using the secure keystore method
+forge script script/Deploy.s.sol:DeployBasedAF \
+  --rpc-url https://sepolia.base.org \
+  --account deployer \
+  --sender YOUR_ADDRESS \
+  --broadcast
 ```
 
-#### Step 7: Verify Deployment
-```bash
-# Check contract state
-cast call $COUNTER_CONTRACT_ADDRESS \
-  "number()(uint256)" \
-  --rpc-url $BASE_SEPOLIA_RPC_URL
+### Step 6: Save Contract Addresses
+After deployment, save the contract addresses to your `.env.local` file:
+```env
+NEXT_PUBLIC_CLOUT_TOKEN_ADDRESS=0x...
+NEXT_PUBLIC_PROFILE_NFT_ADDRESS=0x...
+NEXT_PUBLIC_MEME_NFT_ADDRESS=0x...
+NEXT_PUBLIC_BATTLE_ARENA_ADDRESS=0x...
 ```
 
-## 📦 Recommended Tech Stack
-
-### Frontend
-- **Framework**: Next.js 14+
-- **Wallet Kit**: OnchainKit (by Coinbase)
-- **Components**: Ready-to-use React components
-- **Styling**: Tailwind CSS
-
-### Smart Contracts
-- **Framework**: Foundry
-- **Language**: Solidity
-- **Testing**: Forge
-
-### Deployment
-- **Frontend**: Vercel
-- **Contracts**: Base Sepolia (testnet) → Base Mainnet (production)
+### Step 7: Verify Deployment
+Visit the [Base Sepolia Explorer](https://sepolia-explorer.base.org) and search for your contract addresses!
 
 ## 🔧 Wallet Setup
 
-### Coinbase Wallet (Recommended)
-1. Install browser extension
-2. Connect to app
-3. Switch network to Base/Base Sepolia
+### Coinbase Wallet (Recommended for Base)
+1. **Install** the browser extension from https://wallet.coinbase.com/
+2. **Create or import** your wallet
+3. **Switch network** to Base Sepolia:
+   - Click network dropdown
+   - Select "Testnets"
+   - Choose "Base Sepolia"
 
 ### MetaMask
-1. Open network dropdown
-2. Add network manually
-3. Enter Base network details (see above)
+1. **Open** MetaMask extension
+2. **Click** network dropdown at the top
+3. **Select** "Add network" → "Add network manually"
+4. **Enter Base Sepolia details**:
+   - Network Name: `Base Sepolia`
+   - RPC URL: `https://sepolia.base.org`
+   - Chain ID: `84532`
+   - Currency Symbol: `ETH`
+   - Block Explorer: `https://sepolia-explorer.base.org`
+5. **Save** and switch to Base Sepolia
 
 ## 📚 Key Resources
 
+### Base Platform
 - **Base Documentation**: https://docs.base.org/
 - **OnchainKit Docs**: https://docs.base.org/onchainkit
 - **Build App Tutorial**: https://docs.base.org/get-started/build-app
 - **Network Faucets**: https://docs.base.org/base-chain/tools/network-faucets
 - **Base GitHub**: https://github.com/base
 
-## 🎯 Next Steps
+### Development Tools
+- **Foundry Book**: https://book.getfoundry.sh/
+- **Solidity Docs**: https://docs.soliditylang.org/
+- **Next.js Docs**: https://nextjs.org/docs
 
-1. Choose your project idea
-2. Set up accounts and get API keys
-3. Initialize project with OnchainKit
-4. Deploy sample contract to Base Sepolia
-5. Build frontend with wallet integration
-6. Test thoroughly on testnet
-7. Deploy to mainnet when ready
-8. Submit to Base Ecosystem Page
+### Base Sepolia Testnet
+- **Faucet**: https://portal.cdp.coinbase.com/products/faucet
+- **Explorer**: https://sepolia-explorer.base.org
+- **RPC URL**: https://sepolia.base.org
+- **Chain ID**: 84532
 
-## 💡 Pro Tips
+## 🎯 Next Steps After Setup
 
-- **Use Base Sepolia** for all development and testing
-- **Paymaster Integration**: Make transactions gasless for better UX
-- **OnchainKit Components**: Use pre-built components for faster development
-- **Identity**: Integrate Coinbase Verified profiles
-- **Mini Apps**: Consider building for Coinbase social feed integration
+1. ✅ **Verify your environment** - Run `npm run dev` and check localhost:3000
+2. 🔑 **Get your API keys** - Coinbase Developer Platform
+3. 💰 **Get testnet ETH** - Use Base Sepolia faucet
+4. 🚀 **Deploy contracts** - Follow the deployment guide
+5. 🎨 **Build the UI** - See [NEXT-STEPS.md](./my-onchainkit-app/NEXT-STEPS.md)
+6. 🧪 **Test thoroughly** - Create profiles, battle, vote
+7. 🎬 **Practice demo** - Perfect your presentation!
 
-## 🚨 Security Reminders
+## 💡 Pro Tips for Hackathon Success
 
-- ⚠️ Never commit private keys or `.env` files
-- ⚠️ Use Foundry keystore for secure key management
-- ⚠️ Test thoroughly on Sepolia before mainnet deployment
-- ⚠️ Get API keys from official sources only
+- ⚡ **Deploy early** - Test contracts on Base Sepolia ASAP
+- 🎨 **Use OnchainKit components** - Pre-built, tested, and optimized
+- 🎯 **Keep it simple** - Focus on core battle flow first, add features later
+- 🧪 **Test with 2 wallets** - Use different browsers or incognito mode
+- 📹 **Record your demo** - Have a backup video in case of technical issues
+- 🎤 **Practice presenting** - Know your talking points and flow
+- 📊 **Show on-chain proof** - Always verify on Base Explorer during demo
+
+## 🚨 Security & Best Practices
+
+- ⚠️ **Never commit private keys** - They're already in `.gitignore`
+- 🔒 **Use Foundry keystore** - Secure key management for deployment
+- 🧪 **Test on Sepolia first** - Never deploy untested code to mainnet
+- 🔑 **Protect your API keys** - Keep `.env` files local only
+- ✅ **Verify contracts** - Always check on Base Explorer after deployment
+- 💰 **Start with testnet** - Use Base Sepolia ETH (it's free!)
+
+## 🆘 Troubleshooting
+
+### Common Issues
+
+| Problem | Solution |
+|---------|----------|
+| **No testnet ETH** | Use the [Coinbase CDP Faucet](https://portal.cdp.coinbase.com/products/faucet) |
+| **Deployment fails** | Check your private key and ETH balance on Base Sepolia |
+| **Contracts not found** | Verify addresses are correct in `.env.local` |
+| **Wallet won't connect** | Make sure you're on Base Sepolia network |
+| **Build errors** | Run `npm install` and check Node.js version (18+) |
+| **Foundry not found** | Re-run `foundryup` to update Foundry |
+
+### Getting Help
+
+- 📖 Check the [Base Documentation](https://docs.base.org/)
+- 💬 Join the [Base Discord](https://discord.gg/buildonbase)
+- 🐛 Review [GitHub Issues](https://github.com/ThisIsPhila/hackathon/issues)
+- 📚 Read [OnchainKit Docs](https://docs.base.org/onchainkit)
+
+---
+
+**Ready to build? Let's go! 🚀**

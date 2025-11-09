@@ -1,66 +1,181 @@
-## Foundry
+# Based AF - Smart Contracts
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Smart contracts for the Based AF on-chain meme battle platform, built with Foundry.
 
-Foundry consists of:
+## 📋 Contracts Overview
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+### CloutToken.sol
+**ERC-20 voting token**
+- Standard ERC-20 implementation
+- Built-in faucet (1000 $CLOUT per 24 hours)
+- Airdrop functionality
+- Used for voting and power-ups
 
-## Documentation
+### ProfileNFT.sol
+**Dynamic user profile NFTs**
+- On-chain SVG metadata generation
+- Win/loss tracking
+- Cringe Cage status management
+- Battle history recording
 
-https://book.getfoundry.sh/
+### MemeNFT.sol
+**Battle meme NFTs**
+- On-chain SVG storage
+- Battle reference linking
+- Based Beam airdrop (10 wallets)
+- Permanent on-chain records
 
-## Usage
+### BattleArena.sol
+**Core game logic**
+- War declaration system
+- $CLOUT-based voting
+- Automatic battle resolution
+- Power-up implementation
+- Event emission for frontend
 
-### Build
+## 🛠 Development with Foundry
 
-```shell
-$ forge build
+Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.
+
+### Quick Start
+
+```bash
+# Build contracts
+forge build
+
+# Run tests
+forge test
+
+# Run tests with gas report
+forge test --gas-report
+
+# Format code
+forge fmt
+
+# Deploy to Base Sepolia
+forge script script/Deploy.s.sol:DeployBasedAF \
+  --rpc-url https://sepolia.base.org \
+  --account deployer \
+  --broadcast \
+  --verify
 ```
 
-### Test
+## 📚 Foundry Tools
 
-```shell
-$ forge test
+- **Forge**: Ethereum testing framework (like Truffle, Hardhat)
+- **Cast**: Swiss army knife for interacting with EVM smart contracts
+- **Anvil**: Local Ethereum node (like Ganache, Hardhat Network)
+- **Chisel**: Fast Solidity REPL
+
+## 🔧 Common Commands
+
+### Building
+```bash
+# Compile all contracts
+forge build
+
+# Clean build artifacts
+forge clean
 ```
 
-### Format
+### Testing
+```bash
+# Run all tests
+forge test
 
-```shell
-$ forge fmt
+# Run specific test
+forge test --match-test testFunctionName
+
+# Run with verbosity
+forge test -vvv
+
+# Generate gas report
+forge test --gas-report
 ```
 
-### Gas Snapshots
+### Contract Interaction
+```bash
+# Call a read-only function
+cast call CONTRACT_ADDRESS "functionName()(returnType)" --rpc-url RPC_URL
 
-```shell
-$ forge snapshot
+# Send a transaction
+cast send CONTRACT_ADDRESS "functionName()" --rpc-url RPC_URL --private-key KEY
+
+# Get contract ABI
+cast abi CONTRACT_ADDRESS --rpc-url RPC_URL
 ```
 
-### Anvil
+### Deployment
+```bash
+# Deploy with script
+forge script script/Deploy.s.sol:DeployBasedAF \
+  --rpc-url https://sepolia.base.org \
+  --broadcast
 
-```shell
-$ anvil
+# Verify on Base Explorer
+forge verify-contract CONTRACT_ADDRESS CONTRACT_NAME \
+  --chain-id 84532 \
+  --etherscan-api-key API_KEY
 ```
 
-### Deploy
+## 🌐 Base Network Configuration
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+### Base Sepolia (Testnet)
+```bash
+# RPC URL
+https://sepolia.base.org
+
+# Chain ID
+84532
+
+# Explorer
+https://sepolia-explorer.base.org
 ```
 
-### Cast
+Add to `foundry.toml`:
+```toml
+[rpc_endpoints]
+base_sepolia = "https://sepolia.base.org"
 
-```shell
-$ cast <subcommand>
+[etherscan]
+base_sepolia = { key = "${BASESCAN_API_KEY}", url = "https://api-sepolia.basescan.org/api" }
 ```
 
-### Help
+## 📖 Documentation
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+- **Foundry Book**: https://book.getfoundry.sh/
+- **Base Docs**: https://docs.base.org/
+- **Solidity Docs**: https://docs.soliditylang.org/
+
+## 🚀 Deployment Guide
+
+For detailed deployment instructions, see [DEPLOYMENT.md](../DEPLOYMENT.md)
+
+Quick deploy:
+```bash
+# Import key to Foundry keystore
+cast wallet import deployer --interactive
+
+# Deploy all contracts
+forge script script/Deploy.s.sol:DeployBasedAF \
+  --rpc-url https://sepolia.base.org \
+  --account deployer \
+  --broadcast \
+  --verify
 ```
+
+## ⚠️ Security
+
+- Never commit private keys
+- Use Foundry keystore for secure key management
+- Test thoroughly on Base Sepolia before mainnet
+- Audit contracts before production deployment
+- Keep dependencies updated
+
+## 🤝 Contributing
+
+Built for the Base Buildathon. Contributions welcome!
+
+---
+
+**Built with Foundry on Base** 🔥

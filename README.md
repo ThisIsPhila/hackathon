@@ -1,97 +1,178 @@
-# Base Buildathon Project
+# 🔥 Based AF - The On-Chain Clout Battleground
 
-> Building on Base - Ethereum Layer 2 for the next billion users onchain
+> **Where memes become immortal and losers get caged**
 
-## Project Overview
+## 🎯 Project Overview
 
-This repository is set up for the Base Buildathon, focusing on creating onchain applications with real user impact.
+Based AF is a revolutionary live, on-chain meme war platform built on Base where users battle for social dominance. It's Twitter meets Twitch meets crypto - pure digital chaos on the blockchain.
 
-## What is Base?
+**Built for the Base Buildathon** - A project showcasing the power of Base's fast, low-cost infrastructure for next-generation social applications.
 
-Base is a fast, low-cost, builder-friendly Ethereum L2 built to bring the next billion users onchain. It's incubated by Coinbase and provides:
-- Sub-cent transaction fees
-- Fast block times
-- Full EVM compatibility
-- Built-in distribution through Coinbase ecosystem
+## 🎮 How It Works
 
-## Tech Stack
+### The Concept
+1. **Create Your "Base"** - Each player gets a profile as an NFT on Base
+2. **Mint Absolute Fire** - Create spicy memes as on-chain NFTs
+3. **Declare War** - Challenge someone to a "clout battle"
+4. **The Arena** - Live feed where people vote with $CLOUT tokens
+5. **Winner Takes All** - Winning meme gets immortalized on-chain, loser's profile gets temporarily tarnished
 
-- **Frontend**: Next.js + OnchainKit
+### 🔥 Key Features
+
+#### The Stunt Button
+- One-click mint your meme directly to Base
+- Gasless transactions via Base Paymaster
+- Every battle permanently recorded on-chain
+
+#### Clout Cannons (Power-Ups)
+- **Viral Boost** - 2x votes for 30 seconds (100 $CLOUT)
+- **Ratio Shield** - Immune to downvotes (100 $CLOUT)
+- **Based Beam** - Auto-mint to 10 random wallets (100 $CLOUT)
+
+#### The Cringe Cage
+- Losers trapped for 1 hour with giant L
+- Profile displays cringe status
+- Escape by paying $CLOUT bail
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js 15 + OnchainKit + Tailwind CSS
 - **Smart Contracts**: Solidity + Foundry
-- **Deployment**: Vercel (frontend) + Base (contracts)
+  - `CloutToken.sol` - ERC-20 voting token with faucet
+  - `ProfileNFT.sol` - Dynamic SVG profile NFTs
+  - `MemeNFT.sol` - Battle meme NFTs with airdrop
+  - `BattleArena.sol` - Complete battle system
+- **Deployment**: Vercel (frontend) + Base Sepolia (contracts)
 - **Wallet**: Coinbase Wallet / MetaMask
 - **Network**: Base Sepolia (testnet) → Base Mainnet (production)
 
-## Getting Started
-
-See [SETUP.md](./SETUP.md) for detailed setup instructions.
-
-### Quick Start
-
-```bash
-# Initialize OnchainKit project
-npm create onchain@latest
-
-# Or clone this repo and install
-npm install
-npm run dev
-```
-
-## Project Structure
+## 📂 Project Structure
 
 ```
 hackathon/
-├── README.md           # This file
-├── SETUP.md           # Detailed setup guide
-├── .gitignore         # Git ignore patterns
-├── contracts/         # Smart contracts (Foundry)
-│   ├── src/
-│   ├── test/
-│   └── script/
-└── app/               # Next.js frontend (if using OnchainKit)
-    ├── components/
-    ├── app/
-    └── public/
+├── README.md              # Project overview (you are here)
+├── SETUP.md              # Detailed setup guide
+├── my-onchainkit-app/    # Main application
+│   ├── README.md         # App-specific documentation
+│   ├── DEPLOYMENT.md     # Deployment guide
+│   ├── NEXT-STEPS.md     # Development roadmap
+│   ├── QUICK-REF.md      # Quick reference for common tasks
+│   ├── app/              # Next.js frontend
+│   ├── contracts/        # Solidity smart contracts
+│   │   ├── src/          # Contract source files
+│   │   ├── test/         # Contract tests
+│   │   └── script/       # Deployment scripts
+│   └── public/           # Static assets
+└── baseAF/               # Additional resources
 ```
 
-## Development Workflow
+## 🚀 Quick Start
 
-1. **Design & Prototype**: Use Lovable for rapid UI prototyping
-2. **Smart Contracts**: Write and test contracts with Foundry
-3. **Deploy to Testnet**: Deploy to Base Sepolia for testing
-4. **Build Frontend**: Create React app with OnchainKit components
-5. **Integrate**: Connect frontend to deployed contracts
-6. **Test**: Thoroughly test on Base Sepolia
-7. **Deploy**: Ship to Base Mainnet and Vercel
+### Prerequisites
+- Node.js 18+
+- Coinbase Wallet or MetaMask
+- Base Sepolia testnet ETH (from [faucet](https://portal.cdp.coinbase.com/products/faucet))
+- Coinbase Developer Platform API Key
 
-## Key Features to Consider
+### Installation
 
-- 🔐 Wallet authentication with Coinbase/MetaMask
-- 💸 Gasless transactions with Paymaster
-- 🆔 Coinbase Verified identity integration
-- 🎮 Low-cost onchain gaming/creator tools
-- 📱 Mini Apps for Coinbase social feed
-- 💰 Payment intents and commerce features
+```bash
+# Clone the repository
+git clone https://github.com/ThisIsPhila/hackathon.git
+cd hackathon/my-onchainkit-app
 
-## Resources
+# Install dependencies
+npm install
 
-- [Base Docs](https://docs.base.org/)
-- [OnchainKit Docs](https://docs.base.org/onchainkit)
-- [Foundry Book](https://book.getfoundry.sh/)
-- [Base GitHub](https://github.com/base)
+# Set up environment variables
+cp .env.example .env.local
+# Add your CDP_API_KEY and contract addresses
 
-## Network Information
+# Run development server
+npm run dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000) to see the app!
+
+For detailed setup instructions, see [SETUP.md](./SETUP.md).
+
+## 🎬 Demo Flow
+
+Perfect for presenting the project:
+
+1. **👤 Create Profile** - Mint your profile NFT on Base
+2. **💰 Get CLOUT** - Use faucet for 1000 $CLOUT tokens
+3. **⚔️ Declare War** - Challenge another player
+4. **🎨 Submit Memes** - Both players create their best meme
+5. **🗳️ Community Votes** - 2-minute voting period with $CLOUT
+6. **🏆 Winner Announced** - Winning meme minted on-chain, loser sent to Cringe Cage
+7. **🚀 Based Beam** - Airdrop winning meme to 10 wallets
+8. **🔍 Verify On-Chain** - View on [Base Sepolia Explorer](https://sepolia-explorer.base.org)
+
+## 💎 Why Base?
+
+Base is the perfect platform for Based AF because it provides:
+- **⚡ Lightning Fast** - Sub-second block times for real-time battles
+- **💵 Dirt Cheap** - Sub-cent transaction fees make voting affordable
+- **🔗 Full EVM Compatibility** - Use standard Solidity tools
+- **🌐 Coinbase Integration** - Built-in distribution to millions of users
+- **🛡️ Secure** - Built on Ethereum's security model
+
+## 🌐 Network Information
 
 ### Base Sepolia (Testnet)
-- RPC: https://sepolia.base.org
-- Chain ID: 84532
-- Explorer: https://sepolia-explorer.base.org
+- **RPC**: https://sepolia.base.org
+- **Chain ID**: 84532
+- **Explorer**: https://sepolia-explorer.base.org
+- **Faucet**: https://portal.cdp.coinbase.com/products/faucet
 
-### Base Mainnet
-- RPC: https://mainnet.base.org
-- Chain ID: 8453
-- Explorer: https://base.blockscout.com/
+### Base Mainnet (Production)
+- **RPC**: https://mainnet.base.org
+- **Chain ID**: 8453
+- **Explorer**: https://base.blockscout.com/
 
-## License
+## 📚 Documentation
+
+**Complete Documentation Index:** [DOCUMENTATION-INDEX.md](./DOCUMENTATION-INDEX.md)
+
+### For Everyone
+- **[README.md](./README.md)** - Project overview (you are here)
+- **[PRESENTATION-GUIDE.md](./PRESENTATION-GUIDE.md)** - Complete presentation guide with demo script
+
+### For Developers
+- **[SETUP.md](./SETUP.md)** - Complete setup guide with prerequisites
+- **[my-onchainkit-app/README.md](./my-onchainkit-app/README.md)** - Application-specific documentation
+- **[my-onchainkit-app/DEPLOYMENT.md](./my-onchainkit-app/DEPLOYMENT.md)** - Smart contract deployment guide
+- **[my-onchainkit-app/NEXT-STEPS.md](./my-onchainkit-app/NEXT-STEPS.md)** - Development roadmap
+- **[my-onchainkit-app/QUICK-REF.md](./my-onchainkit-app/QUICK-REF.md)** - Quick reference for commands
+- **[my-onchainkit-app/contracts/README.md](./my-onchainkit-app/contracts/README.md)** - Smart contracts documentation
+
+## 🎓 Resources
+
+- [Base Documentation](https://docs.base.org/)
+- [OnchainKit Documentation](https://docs.base.org/onchainkit)
+- [Foundry Book](https://book.getfoundry.sh/)
+- [Base GitHub](https://github.com/base)
+- [Base Faucets](https://docs.base.org/base-chain/tools/network-faucets)
+
+## 🏗️ Development Status
+
+- ✅ Smart contracts designed and implemented
+- ✅ Foundry setup and configuration
+- ✅ Deployment scripts ready
+- ✅ OnchainKit integration
+- ⏳ Frontend UI components (in progress)
+- ⏳ Testing and optimization
+- ⏳ Production deployment
+
+## 🤝 Contributing
+
+This is a Base Buildathon project. Contributions, issues, and feature requests are welcome!
+
+## 📄 License
 
 MIT
+
+---
+
+**Built with ❤️ on Base** | [Base Buildathon 2024](https://base.org/buildathon)
